@@ -5,8 +5,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bzbzbz"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Background="#FF3C3C3C">
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <!--<                      >-->
+        
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--<                      >-->
+            <DockPanel Margin="10,10,10,0">
+                <TextBox Height="50" Width="200"
+                         Text="Hello world"
+                         Background="{x:Null}" 
+                         BorderThickness="1,1,0,1"
+                         BorderBrush="White" FontSize="22" FontFamily="Global Sans Serif"
+                         VerticalContentAlignment="Center" Foreground="White" Padding="5,0,0,0"/>
+                <Button Content="Подключиться" FontSize="18"
+                        Height="50" Width="130"
+                        Foreground="White" Background="{x:Null}" BorderBrush="White"
+                        HorizontalContentAlignment="Stretch" Padding="5,1,1,1" 
+                        HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+            </DockPanel>
+            
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!--<                       >-->
+            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="5,5,5,5">
+                </StackPanel>
+            </ScrollViewer>
+            <Border Grid.Row="1"
+                    Height="90"
+                    CornerRadius="8,8,8,8" BorderBrush="White" 
+                    BorderThickness="1,1,1,2" VerticalAlignment="Bottom"
+                    Margin="5,5,5,10"
+                >
+                <DockPanel Margin="10,0,10,0">
+                    <TextBox Height="50" MinWidth="260"
+                         Text="Hello world"
+                         Background="{x:Null}" 
+                         BorderThickness="1,1,0,1"
+                         BorderBrush="White" FontSize="26" FontFamily="Global Sans Serif" VerticalContentAlignment="Center" Foreground="White" Padding="5,0,0,0"/>
+                    <Button Content="Отправить" FontSize="24"
+                        Height="50" MaxWidth="130"
+                        Foreground="White" Background="{x:Null}" BorderBrush="White" HorizontalContentAlignment="Stretch" Padding="5,1,1,1" HorizontalAlignment="Left" VerticalContentAlignment="Center"
+                        />
+                </DockPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Window>
