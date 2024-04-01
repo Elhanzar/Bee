@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bzbzbz"
         mc:Ignorable="d"
-        Title="MainWindow" WindowState="Maximized" Background="#FF3C3C3C" Width="1000" Height="600">
+        Title="MainWindow" Background="#FF3C3C3C" Width="900" Height="600" VerticalAlignment="Top">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -16,23 +16,33 @@
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--<                      >-->
             <DockPanel Margin="10,10,10,0">
-                <TextBox Height="50" Width="200"
+                <TextBox x:Name="Host"
+                    Height="50" Width="200"
                          Text="127.0.0.1"
                          Background="{x:Null}" 
                          BorderThickness="1,1,0,1"
                          BorderBrush="White" FontSize="22" FontFamily="Global Sans Serif"
                          VerticalContentAlignment="Center" Foreground="White" Padding="5,0,0,0"/>
-                <Button Content="Подключиться" FontSize="18"
+                <Button x:Name="Connection"
+                    Content="Подключиться" FontSize="18"
                         Height="50" Width="130"
                         Foreground="White" Background="{x:Null}" BorderBrush="White"
                         HorizontalContentAlignment="Stretch" Padding="5,1,1,1" 
-                        HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+                        HorizontalAlignment="Left" VerticalContentAlignment="Center" Click="Connection_Click"/>
             </DockPanel>
-            <Border Grid.Row="1" MinHeight="400"
+            <TextBox x:Name="Name"
+                Height="50" Width="330" Grid.Row="1"
+                         Text="Андрей"
+                         Background="{x:Null}" 
+                         BorderThickness="1,1,1,1"
+                         BorderBrush="White" FontSize="22" FontFamily="Global Sans Serif"
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Padding="5,0,0,0"/>
+            <Border Grid.Row="2" MinHeight="400"
                     CornerRadius="8,8,8,8" BorderBrush="White" 
                     BorderThickness="1,1,1,2"
                     Margin="5,5,5,10" VerticalAlignment="Stretch"
@@ -55,7 +65,7 @@
                     Margin="10,5,5,5" VerticalAlignment="Stretch"
                 >
                 <ScrollViewer VerticalScrollBarVisibility="Auto" BorderBrush="White" Padding="3,3,3,3">
-                    <StackPanel>
+                    <StackPanel Name="Chat">
                     </StackPanel>
                 </ScrollViewer>
             </Border>
@@ -66,7 +76,8 @@
                     Margin="10,5,5,14" VerticalAlignment="Bottom"
                 >
                 <DockPanel Margin="10,0,10,0" HorizontalAlignment="Stretch">
-                    <TextBox Height="50" MaxWidth="300" Width="300"
+                    <TextBox x:Name="Message"
+                        Height="50" MaxWidth="350" Width="350"
                              TextWrapping="Wrap"
                             AcceptsReturn="True"
                          Text="Hello world"
@@ -76,9 +87,10 @@
                              FontFamily="Global Sans Serif" 
                              VerticalContentAlignment="Center"  
                              Foreground="White" Padding="5,0,0,0" UndoLimit="199"/>
-                    <Button Content="Отправить" FontSize="24"
+                    <Button x:Name="Send"
+                        Content="Отправить" FontSize="24"
                         Height="50" MaxWidth="130"
-                        Foreground="White" Background="{x:Null}" BorderBrush="White" HorizontalContentAlignment="Stretch" Padding="5,1,1,1" HorizontalAlignment="Left" VerticalContentAlignment="Center"
+                        Foreground="White" Background="{x:Null}" BorderBrush="White" HorizontalContentAlignment="Stretch" Padding="5,1,1,1" HorizontalAlignment="Left" VerticalContentAlignment="Center" Click="Send_Click"
                         />
                 </DockPanel>
             </Border>

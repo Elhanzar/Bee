@@ -3,7 +3,7 @@ using System.Net.Sockets;
 
 ServerObject server = new ServerObject();// создаем сервер
 await server.ListenAsync(); // запускаем сервер
-
+ 
 class ServerObject
 {
     TcpListener tcpListener = new TcpListener(IPAddress.Any, 8888); // сервер для прослушивания
@@ -23,11 +23,11 @@ class ServerObject
         {
             tcpListener.Start();
             Console.WriteLine("Сервер запущен. Ожидание подключений...");
-
+ 
             while (true)
             {
                 TcpClient tcpClient = await tcpListener.AcceptTcpClientAsync();
-
+ 
                 ClientObject clientObject = new ClientObject(tcpClient, this);
                 clients.Add(clientObject);
                 Task.Run(clientObject.ProcessAsync);
@@ -42,16 +42,29 @@ class ServerObject
             Disconnect();
         }
     }
-
+ 
     // трансляция сообщения подключенным клиентам
     protected internal async Task BroadcastMessageAsync(string message, string id)
     {
         foreach (var client in clients)
         {
+            //if (client.Id == id) // если id клиента равно id отправителя
+            //{
+            //    try
+            //    {
+            //        await client.Writer.WriteLineAsync(message); //передача данных
+            //        await client.Writer.FlushAsync();
+            //    }
+            //    catch { }
+            //}     
             if (client.Id != id) // если id клиента не равно id отправителя
             {
-                await client.Writer.WriteLineAsync(message); //передача данных
-                await client.Writer.FlushAsync();
+                try
+                {
+                    await client.Writer.WriteLineAsync(message); //передача данных
+                    await client.Writer.FlushAsync();
+                }
+                catch { }
             }
         }
     }
@@ -67,13 +80,13 @@ class ServerObject
 }
 class ClientObject
 {
-    protected internal string Id { get; } = Guid.NewGuid().ToString();
-    protected internal StreamWriter Writer { get; }
-    protected internal StreamReader Reader { get; }
-
+    protected internal string Id { get;} = Guid.NewGuid().ToString();
+    protected internal StreamWriter Writer { get;}
+    protected internal StreamReader Reader { get;}
+ 
     TcpClient client;
     ServerObject server; // объект сервера
-
+ 
     public ClientObject(TcpClient tcpClient, ServerObject serverObject)
     {
         client = tcpClient;
@@ -85,7 +98,7 @@ class ClientObject
         // создаем StreamWriter для отправки данных
         Writer = new StreamWriter(stream);
     }
-
+ 
     public async Task ProcessAsync()
     {
         try
